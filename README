@@ -1,0 +1,8 @@
+AMDUCTIVE
+Customizable CLI Pomodoro Timer
+---------------------------------
+
+TODO:
+-Implement weighted random selection
+-Implement pause, reset and quit commands
+-Allow parameter customization from CLI
