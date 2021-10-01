@@ -7,3 +7,6 @@ TODO:
 -Implement pause, reset and quit commands
 -Implement parameter customization from CLI
 -Implement printing out all catergories and time
+-Different time lenghts for go and work
+-add news articles and net stuff
+-time overwrites for items
