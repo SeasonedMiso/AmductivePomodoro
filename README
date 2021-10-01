@@ -5,4 +5,5 @@ Customizable CLI Pomodoro Timer
 TODO:
 -Implement weighted random selection
 -Implement pause, reset and quit commands
--Allow parameter customization from CLI
+-Implement parameter customization from CLI
+-Implement printing out all catergories and time

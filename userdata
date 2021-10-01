@@ -1,0 +1,13 @@
+longBreak = 3
+breakTime = 5
+longBreakTime = 10
+
+catergories={
+"work" : [25,"[10]study"],
+"lit" : [10,"[5]book","[5]vn"],
+"hobby" : [30,"[7]music","[2]draw","[4]skate"],
+"fun" : [30,"[2]non texty game", "[5]texty game", "[5]youtube", "[2]anime"],
+}
+
+workList = ["work", "lit", "work", "hobby", "work", "fun"]
+goList = ["lit", "hobby", "lit", "fun"]
