@@ -19,11 +19,18 @@ breakTime = 5
 longBreakTime = 10
 longBreakCount = longBreak
 # Each catergory is formated as: time for catergory then items, where each item is prefixed by its weighting
+
 catergories = {
     "work": [25, "[10]study"],
     "lit": [20, "[5]book", "[5]vn"],
     "hobby": [15, "[7]music", "[2]draw", "[4]skate"],
     "fun": [20, "[2]non texty game", "[5]texty game", "[5]youtube", "[2]anime"],
+    "stnd": [20, ""],
+}
+cat2 = {
+    "work": {
+        "time": 25
+    }
 }
 
 
@@ -43,6 +50,26 @@ def night():
     pomoBool = True
     goList = ["lit", "fun"]
     pomo(goList)
+
+
+def stnd():
+    pomoBool = True
+    stndList = ["stnd"]
+    timeIn = input("Pomo Time?\n")
+    catergories["stnd"][0] = eval(timeIn)
+    pomo(stndList)
+
+
+def sett():
+    global breakTime
+    global longBreak
+    global longBreakTime
+    global longBreakCount
+    breakTime = eval(input("Break Time?\n"))
+    longBreakTime = eval(input("Long Break Time?\n"))
+    longBreak = eval(input("Pomos before long break?\n"))
+    longBreakCount = longBreak
+    menu()
 
 # Non-user data
 
@@ -117,56 +144,60 @@ def pomo(list):
             # print("\n"+item[0])
             inBreak = True
             while inBreak:
-                if auto == False:
-                    inputObj = input("\nNext up is: " +
-                                     item[0]+". Enter to start\n")
-                    if inputObj == "":
+                if auto:
+                    pomoStart(item)
+                    continue
+                inputObj = input("\nNext up is: " +
+                                 item[0]+". Enter to start\n")
+                match inputObj:
+                    case "":
                         inBreak = False
                         pomoStart(item)
-                    elif inputObj == "skip":
+                    case "skip":
                         break
-                    elif inputObj == "pass":
+                    case "pass":
                         newItem = getItem(list[i])
                         while newItem == item and len(catergories[list[i]]) > 2:
                             newItem = getItem(list[i])
                         item = newItem
-                    elif inputObj == "menu":
+                    case "menu":
                         menu()
                         break
-                    else:
+                    case "set":
+                        sett()
+                    case _:
                         print("unknown input")
-                else:
-                    pomoStart(item)
 
 
 def menu():
     global auto
     pomoBool = False
     inputObj = input("Enter command (h for help):\n")
-    if input == "h":
-        print("work: starts pomodoro with study as focus\n go: starts normal pomodoro\n menu: return to menu\n p: pauses timer\n reset: resets timer\n")
-    elif inputObj == "work":
-        work()
-    elif inputObj == "go":
-        go()
-    elif inputObj == "night":
-        night()
-    elif inputObj == "auto":
-        if auto == False:
-            auto = True
-            print("auto=true")
+    match inputObj:
+        case "h":
+            print(" work: starts pomodoro with study as focus\n go: starts normal pomodoro\n stnd:no flares, no playlists \n set: settings \n menu: return to menu\n p: pauses timer\n reset: resets timer\n")
             menu()
-        else:
-            auto = False
-            print("auto=false")
+        case "work":
+            work()
+        case "go":
+            go()
+        case "night":
+            night()
+        case "stnd":
+            stnd()
+        case "set":
+            sett()
+        case "auto":
+            auto = True if not auto else False
+            print("auto = "+str(auto))
             menu()
-    # elif inputObj == "p":
-    #     pause()
-    # elif inputObj == "reset":
-    #     reset()
-    else:
-        print("unknown command")
-        menu()
+        # elif inputObj == "p":
+        #     pause()
+        # elif inputObj == "reset":
+        #     reset()
+        case _:
+            print("unknown command")
+            menu()
 
 
 def pause():
